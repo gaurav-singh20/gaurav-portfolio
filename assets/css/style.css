@@ -335,13 +335,14 @@ main {
 display: flex !important;
 align-items: center !important;
 justify-content: center !important;
+border-radius: 150px;
 }
 
 .avatar-box img {
 width: 50% !important;
 height: 50% !important;
 object-fit: contain !important;
-border-radius: 10px; 
+border-radius: 90px; 
 }
 
 .info-content .name {
