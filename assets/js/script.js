@@ -217,12 +217,25 @@ const markResumeHighlightShown = function () {
 };
 
 if (resumeHighlightButton && shouldShowResumeHighlight()) {
-  resumeHighlightButton.classList.add("highlight-resume");
   markResumeHighlightShown();
+
+  const playResumeHighlight = function () {
+    resumeHighlightButton.classList.add("highlight-resume");
+
+    window.setTimeout(function () {
+      resumeHighlightButton.classList.remove("highlight-resume");
+    }, 1500);
+  };
+
+  playResumeHighlight();
+
+  window.setTimeout(function () {
+    playResumeHighlight();
+  }, 2500);
 
   window.setTimeout(function () {
     resumeHighlightButton.classList.remove("highlight-resume");
-  }, 1500);
+  }, 4000);
 }
 
 // add event to all nav link
