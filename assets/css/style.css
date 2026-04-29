@@ -485,6 +485,8 @@ border-radius: 90px;
 }
 
 .navbar-link {
+  position: relative;
+  isolation: isolate;
   color: var(--light-gray);
   font-size: var(--fs-8);
   padding: 20px 7px;
@@ -495,6 +497,60 @@ border-radius: 90px;
 .navbar-link:focus { color: var(--light-gray-70); }
 
 .navbar-link.active { color: var(--orange-yellow-crayola); }
+
+.navbar-link.highlight-resume::before,
+.navbar-link.highlight-resume::after {
+  content: "";
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  transform: translate(-50%, -50%) scale(0.35);
+}
+
+.navbar-link.highlight-resume::before {
+  border: 2px solid hsla(45, 100%, 72%, 0.95);
+  box-shadow: 0 0 0 0 hsla(45, 100%, 72%, 0.35);
+  animation: resume-ripple 1.5s ease-out forwards;
+}
+
+.navbar-link.highlight-resume::after {
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle, hsla(45, 100%, 72%, 0.95) 0%, hsla(45, 100%, 72%, 0.25) 45%, transparent 75%);
+  animation: resume-ripple-core 1.5s ease-out forwards;
+}
+
+@keyframes resume-ripple {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.35);
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(4.2);
+  }
+}
+
+@keyframes resume-ripple-core {
+  0% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(0.55);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(3.2);
+  }
+}
 
 
 

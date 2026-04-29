@@ -2,10 +2,6 @@
 
 Responsive personal portfolio website built with HTML, CSS, and JavaScript.
 
-## Demo
-
-![Desktop Demo](./website-demo-image/desktop.png "Desktop Demo")
-![Mobile Demo](./website-demo-image/mobile.png "Mobile Demo")
 
 ## Run Locally
 

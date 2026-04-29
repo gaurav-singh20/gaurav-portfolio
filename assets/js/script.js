@@ -179,6 +179,52 @@ if (form) {
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
+const RESUME_HIGHLIGHT_STORAGE_KEY = "resumeHighlightShown";
+const RESUME_HIGHLIGHT_SESSION_KEY = "resumeHighlightSessionId";
+const resumeHighlightButton = document.querySelectorAll(".navbar-link")[1];
+
+const getResumeHighlightSessionId = function () {
+  try {
+    let sessionId = window.sessionStorage.getItem(RESUME_HIGHLIGHT_SESSION_KEY);
+
+    if (!sessionId) {
+      sessionId = window.crypto && typeof window.crypto.randomUUID === "function"
+        ? window.crypto.randomUUID()
+        : String(Date.now());
+      window.sessionStorage.setItem(RESUME_HIGHLIGHT_SESSION_KEY, sessionId);
+    }
+
+    return sessionId;
+  } catch (error) {
+    return "";
+  }
+};
+
+const shouldShowResumeHighlight = function () {
+  try {
+    return window.localStorage.getItem(RESUME_HIGHLIGHT_STORAGE_KEY) !== getResumeHighlightSessionId();
+  } catch (error) {
+    return false;
+  }
+};
+
+const markResumeHighlightShown = function () {
+  try {
+    window.localStorage.setItem(RESUME_HIGHLIGHT_STORAGE_KEY, getResumeHighlightSessionId());
+  } catch (error) {
+    return;
+  }
+};
+
+if (resumeHighlightButton && shouldShowResumeHighlight()) {
+  resumeHighlightButton.classList.add("highlight-resume");
+  markResumeHighlightShown();
+
+  window.setTimeout(function () {
+    resumeHighlightButton.classList.remove("highlight-resume");
+  }, 1500);
+}
+
 // add event to all nav link
 for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
